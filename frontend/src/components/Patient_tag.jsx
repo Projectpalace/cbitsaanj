@@ -1,4 +1,4 @@
-import './Patien_tag.css';
+import './Patient_tag.css';
 
 const Patient_tag =(props, setpatient)=>
 {
