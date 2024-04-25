@@ -1,0 +1,15 @@
+.App {
+    height: 100vh;
+  }
+  
+.stage{
+    width:80%;
+    height:30%;
+    margin-top: 30px;
+    margin-left: 10%;
+    border:1px solid black;
+    overflow-y: scroll;
+    border-radius: 3px;
+  }
+  
+  
