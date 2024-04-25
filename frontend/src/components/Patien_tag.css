@@ -1,0 +1,27 @@
+.Patient_tag{
+    height:90px;
+    width: calc(100%-10px);
+    border: 1px solid rgb(58, 58, 58);
+    margin: 10px;
+    border-radius: 2px;
+    background-color: rgb(222, 222, 222);
+}
+
+.Patient_tag:hover{
+    border: 1.4px solid rgb(116, 116, 116);
+}
+
+.Patient_tag:active{
+    border: 1.4px solid rgb(244, 52, 52);
+}
+
+.patient_details{
+    display: flex;
+    justify-content: space-between;
+    margin:10px;
+}
+
+.patient_disc{
+    margin-top: 0px;
+    margin: 10px;
+}
