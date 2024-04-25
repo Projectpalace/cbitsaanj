@@ -20,7 +20,7 @@ reportschema = new mongoose.Schema({
     dateopen:Date,
     symptoms:Array,
     dateclosed:Date,
-    treatsuggestions:Array,
+    suggtreats:Array,
     expectdis:Array,
     measuressugg:Array,
     doctornotes:ObjectId,

@@ -1,10 +1,10 @@
 import './Patient_tag.css';
 
-const Patient_tag =(props, setpatient)=>
+const Patient_tag =({setdisplay})=>
 {
     return(
     
-        <div className="Patient_tag" onClick={()=>setpatient()}>
+        <div className="Patient_tag" onClick={() =>setdisplay(1)}>
             <div class="patient_details">
             <div class="patient_name">
                 <p>
