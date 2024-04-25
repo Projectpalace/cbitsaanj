@@ -20,12 +20,12 @@ const Main=()=>{
         <Navbar/>
       </div>
       <div className='stage'>
-        
-        {/* <TouchDrawing/> */}
+
+        {/* <TouchDrawing/> ---- priscription*/} 
 
 
           {/* <Patient_tag/>
-          <Patient_tag/>
+          <Patient_tag/> ------------patient tags 
           <Patient_tag/>
           <Patient_tag/>
           <Patient_tag/>
@@ -34,7 +34,7 @@ const Main=()=>{
 
 
 
-{/* <Worker workerUrl="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js">
+{/* <Worker workerUrl="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js"--------reports>
   <div className='document'>
 <Viewer fileUrl='https://www.antennahouse.com/hubfs/xsl-fo-sample/pdf/basic-link-1.pdf' />;
 </div>
