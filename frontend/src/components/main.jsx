@@ -1,4 +1,4 @@
-import { useState } from 'react';
+
 import Navbar from './Navbar';
 import './Main.css';
 import Patient_tag from './Patient_tag';
