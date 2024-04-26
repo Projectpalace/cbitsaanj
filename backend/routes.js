@@ -1,7 +1,15 @@
 const router = require('express').Router();
-const {welcome} = require('./controllers/functions')
-const {uploadFile,formatFile} = require('./controllers/llmapis')
+const {welcome,record,playrecording,getreports,getpatient,gethistory} = require('./controllers/functions')
+const {uploadFile,formatFile,image} = require('./controllers/llmapis')
+// const {chatbot} = require('./controllers/chatbot')
 router.post('/welcome',welcome)
 router.post('/upload',uploadFile)
 router.post('/format',formatFile)
+router.post('/getreports',getreports)
+router.post('/getpatient',getpatient)
+router.post('/gethistory',gethistory)
+// router.post('/chatbot',chatbot)
+router.post('/record',record)
+router.get('/image/:id',image)
+router.get('/playrecording/:id',playrecording)
 module.exports = router

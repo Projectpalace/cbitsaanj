@@ -9,11 +9,15 @@ PatientSchema = new mongoose.Schema({
     history:Array,
     personalprescriptions:Array,
     reportfiles:Array,
+    blood_group:String,
 })
 caretakerSchema = new mongoose.Schema({
     name: String,
     Homename:String,
 })
+voiceSchema = new mongoose.Schema({
+    voiceData: Buffer,
+  });
 reportschema = new mongoose.Schema({
     patient:ObjectId,
     doctor:ObjectId,
@@ -41,6 +45,7 @@ DoctorSchema = new mongoose.Schema({
 const Patient = mongoose.model('Patient', PatientSchema)
 const caretaker = mongoose.model('caretaker', caretakerSchema)
 const report = mongoose.model('report', reportschema)
+const Voice = mongoose.model('Voice', voiceSchema);
 const doctor = mongoose.model('doctor', DoctorSchema)
 
-module.exports = { Patient, caretaker, report, doctor }
+module.exports = { Patient, caretaker, report, doctor ,Voice}
