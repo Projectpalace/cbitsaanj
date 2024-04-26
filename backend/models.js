@@ -7,6 +7,7 @@ PatientSchema = new mongoose.Schema({
     Chronics:Array,
     Phone:Number,
     history:Array,
+    personalprescriptions:Array,
     reportfiles:Array,
 })
 caretakerSchema = new mongoose.Schema({

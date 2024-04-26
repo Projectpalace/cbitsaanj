@@ -19,10 +19,10 @@ const connection = mongoose.connection;
 connection.once('open', () => {
   console.log("MongoDB database connection established successfully");
 })
-app.use(express.static(path.join(__dirname,'./build ')));
-app.get('/', (req, res) => {
-  res.sendFile(path.resolve(__dirname,'./build', 'index.html'));;
-});
+app.use(express.static(path.join(__dirname,'./build')));
+app.get("/",cors(),(req,res)=>{
+  res.sendFile(path.resolve(__dirname,'./build', 'index.html'));
+})
 app.use('/en',approute);
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

@@ -5,8 +5,8 @@ const Patient_tag =({setdisplay})=>
     return(
     
         <div className="Patient_tag" onClick={() =>setdisplay(1)}>
-            <div class="patient_details">
-            <div class="patient_name">
+            <div className="patient_details">
+            <div className="patient_name">
                 <p>
                    Patient name:  <strong>
                     T.Nithin Chowdary
@@ -14,7 +14,7 @@ const Patient_tag =({setdisplay})=>
                 </p>
                 
             </div>
-            <div class="patient_name">
+            <div className="patient_name">
                 <p>
                    Blood-Group:  <strong>
                     O+ve
@@ -22,7 +22,7 @@ const Patient_tag =({setdisplay})=>
                 </p>
                 
             </div>
-            <div class="patient_name">
+            <div className="patient_name">
                 <p>
                    age:  <strong>
                     35
@@ -30,7 +30,7 @@ const Patient_tag =({setdisplay})=>
                 </p>
                 
             </div>
-            <div class="Patient_name">
+            <div className="Patient_name">
                 <p>
                    Sex:  <strong>
                     Male
@@ -38,7 +38,7 @@ const Patient_tag =({setdisplay})=>
                 </p>
                 
             </div>
-            <div class="patient_name">
+            <div className="patient_name">
                 <p>
                    Phone No:  <strong>
                     8125611565
@@ -47,7 +47,7 @@ const Patient_tag =({setdisplay})=>
                 
             </div>
             
-            <div class="patient_name">
+            <div className="patient_name">
                 <p>
                    patient-ID:  <strong>
                     #123$
@@ -56,7 +56,7 @@ const Patient_tag =({setdisplay})=>
                 
             </div>
         </div>
-        <div class="patient_disc">
+        <div className="patient_disc">
             <p>
                 <strong>
                     This is patint is not a patient he is healthy with all the
