@@ -1,0 +1,37 @@
+*{
+    margin : 0px;
+}
+
+.Home{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+button{
+    height :70px;
+    margin-top:  50%;
+    font-size: 18px;
+    width : 200px;
+    color:aliceblue;
+    border-radius: 4px;
+    border: none;
+    background-color: rgb(12, 91, 209);
+}
+
+button:hover{
+    border:3px solid rgb(46, 75, 120);
+}
+
+button:active{
+    border:5px solid rgb(46, 75, 120);
+}
+
+#doctor{
+    margin-right: 90px;
+}
+
+#care_taker{
+    margin-left:90px;
+}

@@ -8,17 +8,24 @@ import { Worker } from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import TouchDrawing from './Doctors_priscription';
 import { useState } from 'react';
+import PopupButton from './Popup';
 
 const Main = () => {
   const [patient,setpatient]=useState(null)
   const [display,setdisplay]=useState(0)
     return (
         <div className='Main_body'>
+           
             <div>
               {
                 display===0 ? <Navbar2 setdisplay={setdisplay}/> : <Navbar setdisplay={setdisplay}/>
               }
             </div>
+            <div className='subnavbar'>
+            <button id="back_button">Back</button>
+            <button id='prescription'>Prescribe</button>
+            </div>
+            
             <div className='stage'>
               {
                 display===0 ?
