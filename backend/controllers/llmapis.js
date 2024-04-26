@@ -229,8 +229,23 @@ const formatFile= (req, res) => {
 
 };
 
+const getTxt = async (req, res) => {
+  console.log("hello")
+  const doc = await report.findOne({File: "662bf6efddcc57968a4cb6f9"});
+  console.log(doc);
+  res.send({
+    suggestedtreatments: doc.suggtreats,
+    potentialhealthrisks: doc.summary,
+    preventivemeasures: doc.measures,
+    preventivemeasures_new: doc.preventive_measures
+  });
+  console.log(doc);
+};
+
+
 module.exports={
     uploadFile,
     formatFile,
-    image
+    image,
+    getTxt
 }

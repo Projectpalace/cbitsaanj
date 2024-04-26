@@ -19,7 +19,6 @@ const Popup = ({Prescribe,setprescribe}) => {
       togglePopup()
     }
   },[Prescribe])
-  console.log('i',Prescribe,showPopup)
 
   return (
     <div>

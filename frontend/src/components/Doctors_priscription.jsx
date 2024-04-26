@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import './Prescription.css';
 import { jsPDF } from 'jspdf';
-import axios from 'axios';
 
 const TouchDrawing = () => {
   const canvasRef = useRef(null); // Reference to the canvas element
@@ -74,38 +73,17 @@ const TouchDrawing = () => {
     };
   }, [isDrawing]); // Effect dependency on isDrawing
 
-  const savePdfToBackend = () => {
+  const downloadPdf = () => {
     const canvas = canvasRef.current;
     const pdf = new jsPDF();
     pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 210, 297); // Add canvas image to PDF
-
-    // Convert PDF to Blob
-    const blob = pdf.output('blob');
-
-    // Create FormData object and append Blob
-    const formData = new FormData();
-    formData.append('file', blob, 'canvas_drawing.pdf');
-    console.log(formData)
-
-    // Send PDF data to backend using Axios
-    axios.post('/upload', formData, {
-      
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    }).then(response => {
-      // Handle response from backend if needed
-      console.log('PDF saved to backend:', response.data);
-    }).catch(error => {
-      // Handle error if any
-      console.error('Error saving PDF to backend:', error);
-    });
+    pdf.save('canvas_drawing.pdf'); // Save PDF directly in the browser
   };
 
   return (
     <div>
-      <canvas ref={canvasRef} width={950} height={720} style={{ border: '1px solid black', backgroundColor: 'white' }} />
-      <button className='download_prescription' onClick={savePdfToBackend}>&#x2713;</button>
+      <canvas ref={canvasRef} width={950} height={520} style={{ border: '1px solid black', backgroundColor: 'white' }} />
+      <button className='download_prescription' onClick={downloadPdf}>&#x2713;</button>
     </div>
   );
 };

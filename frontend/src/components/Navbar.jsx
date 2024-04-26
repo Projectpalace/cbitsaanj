@@ -1,8 +1,20 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import './Navbar.css';
 import Patient_tag from './Patient_tag';
+import axios from 'axios';
 
 const Navbar = ({ setdisplay}) => {
+    const getResponseText = async () => {
+        const response = await axios.get('/en/getresponse');
+        return response.data;
+    }
+    const [responseText, setResponseText] = useState();
+
+    useEffect(() => {
+        getResponseText().then((text) => setResponseText(text));
+    }, []);
+    console.log(responseText);
+
     const [navdisplay,setnavdisplay]=useState(0)
     const switcher=()=>{
         if (navdisplay===0){
