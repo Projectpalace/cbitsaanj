@@ -20,7 +20,8 @@ const Patient_tag =({setdisplay,pat,setpatient})=>
 
     return(
     
-        <div className="Patient_tag" onClick={() =>setdisplay(1)}>
+        <div className="Patient_tag" onClick={() =>{setdisplay(1)
+        setpatient(pat)}}>
             <div className="patient_details">
             <div className="patient_name">
                 <p>

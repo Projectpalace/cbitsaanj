@@ -13,7 +13,7 @@ const approute=require('./routes')
 
 
 require('dotenv').config();
-const {Voice,report} = require('./models');
+const {Voice,report,PdfModel} = require('./models');
 
 const port = process.env.PORT;
 
@@ -23,14 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-const pdfSchema = new mongoose.Schema({
-  name: String,
-  content: Buffer
-});
 
-
-
-const PdfModel = mongoose.model('Pdf', pdfSchema);
 
 
 // Create a model based on the schema

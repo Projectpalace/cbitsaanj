@@ -8,6 +8,7 @@ PatientSchema = new mongoose.Schema({
     Phone:Number,
     history:Array,
     personalprescriptions:Array,
+    report:Array,
     reportfiles:Array,
     blood_group:String,
 })
@@ -41,12 +42,18 @@ DoctorSchema = new mongoose.Schema({
     patients:Array,
     reportfiles:Array,
 })
+const pdfSchema = new mongoose.Schema({
+  name: String,
+  content: Buffer
+});
 
 
+
+const PdfModel = mongoose.model('Pdf', pdfSchema);
 const Patient = mongoose.model('Patient', PatientSchema)
 const caretaker = mongoose.model('caretaker', caretakerSchema)
 const report = mongoose.model('report', reportSchema)
 const Voice = mongoose.model('Voice', voiceSchema);
 const doctor = mongoose.model('doctor', DoctorSchema)
 
-module.exports = { Patient, caretaker, report, doctor ,Voice}
+module.exports = { Patient, caretaker, report, doctor ,Voice,PdfModel}

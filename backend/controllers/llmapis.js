@@ -5,10 +5,10 @@ const express = require('express');
 const app = express();
 const pdfParse = require('pdf-parse');
 app.use(express.json());
-const {report}=require('../models')
+const {report,PdfModel}=require('../models')
 const { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } = require("@google/generative-ai");
 const { ObjectId } = require('mongodb');
-
+const PDFDocument = require('pdfkit');
 app.use(express.json());
 
 const upload = multer({ dest: 'uploads/' });
@@ -127,21 +127,35 @@ const uploadFile = async (req, res) => {
   }
 };
 
-const image = async(req, res) => {
-  try 
-  {
-      const id = req.params.id;
-      if (!id || id.length !== 24) {
-          throw new Error('Invalid ObjectId format');
-      }
-      const fileId = new mongoose.Types.ObjectId(id);
-      await gfs.openDownloadStream(fileId).pipe(res);
+// Express route to handle PDF generation
+const genpdf = async (req, res) => {
+  console.log('loll')
+  try {
+      // Create PDF buffer
+      const pdfid = req.params.id;
+      const pdf = await PdfModel.findOne({_id:pdfid});
+      const bufferToPDF = (buffer) => {
+        return new Promise((resolve, reject) => {
+            const doc = new PDFDocument();
+            const chunks = [];
+            doc.on('data', (chunk) => chunks.push(chunk));
+            doc.on('end', () => resolve(Buffer.concat(chunks)));
+            doc.end(buffer);
+        });
+      };
+      const pdfBuffer = await bufferToPDF(pdf.content);
+
+      // Set headers for PDF response
+      res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader('Content-Disposition', 'attachment; filename="generated.pdf"');
+
+      // Send PDF buffer as response
+      res.send(pdfBuffer);
+  } catch (error) {
+      console.error('Error generating PDF:', error);
+      res.status(500).send('Error generating PDF');
   }
-  catch(error)
-  {
-      console.log(error);
-  }
-};
+}
 
 const formatFile= (req, res) => {
   const matter=req.body.message;
@@ -246,6 +260,6 @@ const getTxt = async (req, res) => {
 module.exports={
     uploadFile,
     formatFile,
-    image,
+    genpdf,
     getTxt
 }

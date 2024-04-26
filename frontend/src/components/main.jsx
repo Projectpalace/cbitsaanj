@@ -16,6 +16,7 @@ import Popup from './Popup';
 const Main = () => {
   const navigate=useNavigate();
   const [patient,setpatient]=useState(null)
+  const [report,setreport]=useState({})
   const [list,setlist]=useState([])
   const [display,setdisplay]=useState(0)
   const [Prescribe,setprescribe]=useState(false)
@@ -37,7 +38,7 @@ const Main = () => {
   }
   useEffect(()=>{
     GetPatientList();
-  })
+    });
     return (
         <div className='Main_body'>
 
@@ -64,12 +65,24 @@ const Main = () => {
                       <Patient_tag key={index} setdisplay={setdisplay} setpatient={setpatient} pat={pat}/>
                   ))}
                 </div>
+                :display===3 ?
+                  <p>report analysis</p>:
+                  display===4 ?
+                  <p>Risk Prediction</p>:
+                  display==5?
+                  <p>Precautions</p>
+                  :
+                  display===6 ?
+                  <p>details</p>
+                  :display===7?
+                  <p>reports</p>:
+                  display===8?
+                  <p>medical history</p>
                 :<Report_pdf patient={patient}/>
               }
               <Popup Prescribe={Prescribe} setprescribe={setprescribe}/>
             </div>
         </div>
     );
-};
-
+  }
 export default Main;

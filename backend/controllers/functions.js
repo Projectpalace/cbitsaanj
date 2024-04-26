@@ -47,7 +47,7 @@ const getreports = async (req, res) => {
   try {
     const id=req.body.id
     const reports = await report.findOne({_id:id});
-    res.json(reports.reportfiles);
+    res.json(reports);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to retrieve reports' });
