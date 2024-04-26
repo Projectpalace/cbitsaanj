@@ -77,19 +77,19 @@ console.log(responseText);
                 </div>
                 :display===3 ?
                 <ul>
-                {responseText && responseText.suggestedtreatments.map((item, index)=>(
+                {responseText && responseText.potentialhealthrisks.map((item, index)=>(
                   <li key={index}>{item}</li>
                 ))}
               </ul>:
                   display===4 ?
                   <ul>
-                    {responseText && responseText.potentialhealthrisks.map((item, index)=>(
+                    {responseText && responseText.preventivemeasures.map((item, index)=>(
                       <li key={index}>{item}</li>
                     ))}
                   </ul>:
                   display==5?
                   <ul>
-                    {responseText.preventivemeasures.map((item, index)=>(
+                    {responseText.preventivemeasures_new.map((item, index)=>(
                       <li key={index}>{item}</li>
                     ))}
                   </ul>
