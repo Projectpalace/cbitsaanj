@@ -122,6 +122,21 @@ const uploadFile = async (req, res) => {
   }
 };
 
+const image = async(req, res) => {
+  try 
+  {
+      const id = req.params.id;
+      if (!id || id.length !== 24) {
+          throw new Error('Invalid ObjectId format');
+      }
+      const fileId = new mongoose.Types.ObjectId(id);
+      await gfs.openDownloadStream(fileId).pipe(res);
+  }
+  catch(error)
+  {
+      console.log(error);
+  }
+};
 
 const formatFile= (req, res) => {
   const matter=req.body.message;
@@ -196,5 +211,6 @@ const formatFile= (req, res) => {
 
 module.exports={
     uploadFile,
-    formatFile
+    formatFile,
+    image
 }
