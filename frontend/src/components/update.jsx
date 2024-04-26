@@ -1,6 +1,7 @@
 // React Component
 import React, { useState } from 'react';
 import axios from 'axios';
+import './update.css'
 
 const FileUpload = () => {
   const [chatResponse, setChatResponse] = useState("");
@@ -38,13 +39,29 @@ const FileUpload = () => {
   };
 
   return (
-    <div>
-      <input type="file" accept="application/pdf" onChange={onFileChange} />
+    <div className='upload_container'>
+      {/* <input type="file" accept="application/pdf" onChange={onFileChange} />
       <button onClick={onFileUpload}>Upload</button>
       <p>{chatResponse}</p>
-      <br />
-      {/* <p>{formattedResponse}</p> */}
+      <br /> 
+      <p>{formattedResponse}</p> */}
+
+
+
+
+       <div class="container">
+  <h2>Upload Report</h2>
+  <input id="file-upload" class="input-file" type="file" accept="application/pdf" onChange={onFileChange} />
+  <button for="file-upload" class="upload-button" onClick={onFileUpload}>Upload</button>
+  
+  <p>{chatResponse}</p>
+  
+</div>
+
     </div>
+
+
+
   );
 };
 
