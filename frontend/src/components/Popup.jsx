@@ -1,49 +1,39 @@
-import React, { useState } from 'react';
-import './Popup.css'; // You may need to create this CSS file to include the styles
+import React, { useEffect, useState } from 'react';
+import './Popup.css';
+import TouchDrawing from './Doctors_priscription';
 
-function App() {
-  const [isPopupOpen, setPopupOpen] = useState(false);
+const Popup = ({Prescribe,setprescribe}) => {
+  const [showPopup, setShowPopup] = useState(false);
 
-  const openPopup = () => {
-    setPopupOpen(true);
-    disableOtherButtons();
-  };
-
-  const closePopup = () => {
-    setPopupOpen(false);
-    enableOtherButtons();
-  };
-
-  const disableOtherButtons = () => {
-    const buttons = document.getElementsByTagName("button");
-    for (let i = 0; i < buttons.length; i++) {
-      if (buttons[i].id !== "popupButton") {
-        buttons[i].disabled = true;
-      }
+  const togglePopup = () => {
+    setShowPopup(prevState => !prevState);
+    if (!showPopup) {
+      document.body.classList.add('popup-active'); 
+    } else {
+      setprescribe(!Prescribe)
+      document.body.classList.remove('popup-active'); 
     }
   };
-
-  const enableOtherButtons = () => {
-    const buttons = document.getElementsByTagName("button");
-    for (let i = 0; i < buttons.length; i++) {
-      buttons[i].disabled = false;
+  useEffect(()=>{
+    if(Prescribe){
+      togglePopup()
     }
-  };
+  },[Prescribe])
+  console.log('i',Prescribe,showPopup)
 
   return (
     <div>
-      <button id="popupButton" onClick={openPopup}>Click Me</button>
-
-      {isPopupOpen && (
-        <div className="popup">
-          <span className="close" onClick={closePopup}>&times;</span>
-          <p>This is a pop-up div!</p>
-        </div>
+      {Prescribe && (
+        <>
+          <div className="overlay"></div>
+          <div className="popup">
+            <span className="close" onClick={togglePopup}>&times;</span>
+            <TouchDrawing/>
+          </div>
+        </>
       )}
-
-      {isPopupOpen && <div id="overlay"></div>}
     </div>
   );
-}
+};
 
-export default App;
+export default Popup;

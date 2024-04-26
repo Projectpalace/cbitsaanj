@@ -16,10 +16,11 @@
   height:40px;
   margin: 10px;
   width:100px;
-  border:0.5px solid rgb(174, 174, 174);
-  background-color: rgb(204, 205, 205);
+  border:0.5px solid rgb(147, 147, 147);
+  background-color: rgb(184, 186, 186);
   border-radius:3px;
   font-size: 16px;
+  color:white;
 }
 
 .subnavbar button:hover{

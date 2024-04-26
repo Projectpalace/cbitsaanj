@@ -1,0 +1,16 @@
+.ctstage{
+    width:80%;
+    height:74%;
+    margin-top: 10px;
+    margin-bottom: 100px;
+    margin-left: 10%;
+    border:1px solid black;
+    overflow-y: scroll;
+    border-radius: 3px;
+}
+
+.ctpatlist{
+    margin: 0px;
+    height:50px;
+    margin:10px;
+}

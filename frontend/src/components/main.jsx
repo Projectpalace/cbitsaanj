@@ -10,16 +10,15 @@ import TouchDrawing from './Doctors_priscription';
 import { useState } from 'react';
 import PopupButton from './Popup';
 import { useNavigate } from 'react-router-dom';
+import Popup from './Popup';
 
 const Main = () => {
   const navigate=useNavigate();
   const [patient,setpatient]=useState(null)
   const [display,setdisplay]=useState(0)
+  const [Prescribe,setprescribe]=useState(false)
   const back=() => {
-    if(display===2){
-      setdisplay(1);
-    }
-    else if(display===1){
+    if(display===1){
       setdisplay(0);
     }
     else if (display===0){
@@ -28,6 +27,8 @@ const Main = () => {
   }
     return (
         <div className='Main_body'>
+
+        
            
             <div>
               {
@@ -37,7 +38,7 @@ const Main = () => {
             <div className='subnavbar'>
             <button id="back_button" onClick={back}>Back</button>
             {
-              display!==0 && <button id='prescription' onClick={() => setdisplay(2)}>Prescribe</button>
+              display!==0 && <button id='prescription' onClick={()=>setprescribe(!Prescribe)}>Prescribe</button>
             }
             
             </div>
@@ -52,10 +53,9 @@ const Main = () => {
                   <Patient_tag setdisplay={setdisplay} setpatient={setpatient}/>
                   <Patient_tag setdisplay={setdisplay} setpatient={setpatient}/>
                 </div>
-                : display===1 ?
-                  <Report_pdf patient={patient}/>
-                  :<TouchDrawing/>
+                :<Report_pdf patient={patient}/>
               }
+              <Popup Prescribe={Prescribe} setprescribe={setprescribe}/>
             </div>
         </div>
     );

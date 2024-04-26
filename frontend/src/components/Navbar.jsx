@@ -15,23 +15,25 @@ const Navbar = ({ setdisplay}) => {
     return (
         <div className='Navbar'>
             {navdisplay === 0 ? (
-                <div>
+                <div className='Navbar'>
                     <button>Details</button>
                     <button>Reports</button>
                     <button>Medical History</button>
+                    <button onClick={switcher}>Open analysis</button>
                 </div>
             ) : (
-                <div>
-                    <button>
-                        Current Report Analysis
+                <div className='Navbar'>
+                    <button id="analysis">
+                        Report Analysis
                     </button>
-                    <button >
+                    <button id="analysis">
                         Risk Prediction
                     </button>
-                    <button>Precautions</button>
+                    <button id="analysis">Precautions</button>
+                    <button id='analysis'onClick={switcher}>Close Analysis</button>
                 </div>
             )}
-            <button onClick={switcher}>Predictions</button>
+            
         </div>
     );
 };
