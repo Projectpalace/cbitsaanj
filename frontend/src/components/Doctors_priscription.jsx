@@ -104,7 +104,7 @@ const TouchDrawing = () => {
 
   return (
     <div>
-      <canvas ref={canvasRef} width={950} height={570} style={{ border: '1px solid black', backgroundColor: 'white' }} />
+      <canvas ref={canvasRef} width={950} height={720} style={{ border: '1px solid black', backgroundColor: 'white' }} />
       <button className='download_prescription' onClick={savePdfToBackend}>&#x2713;</button>
     </div>
   );
