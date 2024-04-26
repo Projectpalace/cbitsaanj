@@ -12,11 +12,15 @@ const FileUpload = () => {
   };
 
   const onFileUpload = () => {
+    console.log("formdata: ")
     const formData = new FormData();
     formData.append('pdf', file);
+    console.log("formdata",formData)
+    
 
     // First axios request to /api/upload
     axios.post('/api/upload', formData)
+      
       .then(response => {
         // Store the chat response in state
         setChatResponse(response.data.message);

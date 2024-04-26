@@ -23,15 +23,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-
-
 const pdfSchema = new mongoose.Schema({
   name: String,
   content: Buffer
 });
 
-// Create a model based on the schema
+
+
 const PdfModel = mongoose.model('Pdf', pdfSchema);
+
+
+// Create a model based on the schema
+
 const upld = multer();
 
 
@@ -80,7 +83,7 @@ app.post('/api/upload', upld.single('pdf'), async (req, res) => {
     await newPdf.save();
     
 
-    const newReport = new ReportModel({
+    const newReport = new report({
       patient: null,
       doctor: null,
       File: newPdf._id,

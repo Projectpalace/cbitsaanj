@@ -33,7 +33,6 @@ const pdfSchema = new mongoose.Schema({
 
 
 // Create a model based on the schema
-const PdfModel = mongoose.model('Pdf', pdfSchema);
 
 const reportSchema = new mongoose.Schema({
   patient: ObjectId,
