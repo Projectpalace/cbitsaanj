@@ -22,19 +22,17 @@ export default function Recording(){
     };
 
     const playRecording = async () => {
-       
         if (!recordingId) return;
         try {
-            const response = await axios.get(`/en/playrecording/${recordingId}`, {
+            const response = await axios.get(`/en/recordings/${recordingId}`, {
                 responseType: 'blob',
             });
             console.log(response.data)
             const audioUrl = URL.createObjectURL(response.data);
-           
             console.log(audioUrl)
-            /*{setAudioUrl(audioUrl[6]);}*/
-            const audio = new Audio(audioUrl);
-      audio.play();
+            setAudioUrl(audioUrl[6]);
+            /*{const audio = new Audio(audioUrl);
+      audio.play();}*/
         } catch (error) {
             console.error('Error playing recording:', error);
         }
@@ -79,7 +77,7 @@ export default function Recording(){
             <button onClick={playRecording} disabled={!recordingId}>
                 Play Recording
             </button>
-            {/*{audioUrl && (
+            {audioUrl && (
                 <div>
                     <p>Recorded voice:</p>
                     <audio controls>
@@ -87,7 +85,7 @@ export default function Recording(){
                         Your browser does not support the audio element.
                     </audio>
                 </div>
-            )}*/}
+            )}
         </div>
     );
 };

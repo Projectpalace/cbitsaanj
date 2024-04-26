@@ -61,24 +61,9 @@ app.post('/record', upload.single('voice'), async (req, res) => {
     });
     const savedVoice = await voice.save();
     res.status(201).json({ message: 'Voice recorded successfully', recordingId: savedVoice._id });
-    console.log("voice recorded sucessfully");
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to save voice recording' });
-  }
-});
-app.get("/playrecording/:id" ,async (req, res) => {
-  try {
-    const recordingId = req.params.id;
-    const voice = await Voice.findById(recordingId);
-    if (!voice) {
-      return res.status(404).json({ error: 'Recording not found' });
-    }
-    res.set('Content-Type', 'audio/wav');
-    res.send(voice.voiceData);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Failed to retrieve recording' });
   }
 });
 
