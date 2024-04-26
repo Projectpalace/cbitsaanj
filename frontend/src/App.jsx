@@ -1,17 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import DoctorHome from "./components/Doctor's_Home";
 import Main from './components/main';
+import Home from './components/Home';
 
 export default function App() {
     return (
         <div className='App'>
             <Router>
                 <Routes>
-                    {/* <Route exact path="/" component={Main} />
-        <Route path="/caretaker" component={Caretaker} /> */}
-                    <Route path='/' element={<Main/>} />
-                    <Route path='/doctor' element={<DoctorHome/>} />
+                    <Route path='/' element={<Home/>} />
+                    <Route path='/doctor' element={<Main/>}/>
                 </Routes>
             </Router>
         </div>

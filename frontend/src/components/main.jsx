@@ -9,10 +9,23 @@ import '@react-pdf-viewer/core/lib/styles/index.css';
 import TouchDrawing from './Doctors_priscription';
 import { useState } from 'react';
 import PopupButton from './Popup';
+import { useNavigate } from 'react-router-dom';
 
 const Main = () => {
+  const navigate=useNavigate();
   const [patient,setpatient]=useState(null)
   const [display,setdisplay]=useState(0)
+  const back=() => {
+    if(display===2){
+      setdisplay(1);
+    }
+    else if(display===1){
+      setdisplay(0);
+    }
+    else if (display===0){
+      navigate('/')
+    }
+  }
     return (
         <div className='Main_body'>
            
@@ -22,8 +35,11 @@ const Main = () => {
               }
             </div>
             <div className='subnavbar'>
-            <button id="back_button">Back</button>
-            <button id='prescription'>Prescribe</button>
+            <button id="back_button" onClick={back}>Back</button>
+            {
+              display!==0 && <button id='prescription' onClick={() => setdisplay(2)}>Prescribe</button>
+            }
+            
             </div>
             
             <div className='stage'>
