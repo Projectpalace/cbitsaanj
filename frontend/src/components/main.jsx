@@ -20,6 +20,16 @@ const Main = () => {
   const [list,setlist]=useState([])
   const [display,setdisplay]=useState(0)
   const [Prescribe,setprescribe]=useState(false)
+  const getResponseText = async () => {
+    const response = await axios.get('/en/getresponse');
+    return response.data;
+}
+const [responseText, setResponseText] = useState(null);
+
+useEffect(() => {
+    getResponseText().then((text) => setResponseText(text));
+}, []);
+console.log(responseText);
   const GetPatientList=()=>{
     axios.post("/en/getpatients")
       .then((response) => response.data)
@@ -66,11 +76,23 @@ const Main = () => {
                   ))}
                 </div>
                 :display===3 ?
-                  <p>report analysis</p>:
+                <ul>
+                {responseText && responseText.suggestedtreatments.map((item, index)=>(
+                  <li key={index}>{item}</li>
+                ))}
+              </ul>:
                   display===4 ?
-                  <p>Risk Prediction</p>:
+                  <ul>
+                    {responseText && responseText.potentialhealthrisks.map((item, index)=>(
+                      <li key={index}>{item}</li>
+                    ))}
+                  </ul>:
                   display==5?
-                  <p>Precautions</p>
+                  <ul>
+                    {responseText.preventivemeasures.map((item, index)=>(
+                      <li key={index}>{item}</li>
+                    ))}
+                  </ul>
                   :
                   display===6 ?
                   <p>details</p>

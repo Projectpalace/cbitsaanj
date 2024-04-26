@@ -10,5 +10,6 @@ export default function Report_pdf(patient) {
             <div className='document'>
                 <Viewer fileUrl='https://www.antennahouse.com/hubfs/xsl-fo-sample/pdf/basic-link-1.pdf' />;
             </div>
+            
         </Worker>
 )}

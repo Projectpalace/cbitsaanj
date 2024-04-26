@@ -210,7 +210,7 @@ const formatFile= (req, res) => {
           },
           {
             role: "model",
-            parts: [{ text: "```json\n{\n    \"potentialhealthrisks\": [\n        \"Heart disease\",\n        \"Stroke\",\n        \"Kidney disease\",\n        \"Eye damage (retinopathy)\",\n        \"Nerve damage (neuropathy)\"\n    ],\n    \"healthimprovsuggestions\":[\n        \"Follow a healthy diet: Focus on consuming fruits, vegetables, whole grains, and lean protein. Limit processed foods, sugary drinks, and unhealthy fats.\",\n        \"Exercise regularly: Aim for at least 150 minutes of moderate-intensity exercise or 75 minutes of vigorous-intensity exercise per week.\",\n        \"Monitor your blood sugar levels: Check your blood sugar levels regularly as directed by your doctor.\",\n        \"Take prescribed medications: If prescribed, take your diabetes medications as directed.\",\n        \"Quit smoking: Smoking can worsen diabetes complications.\", \n        \"Get regular checkups: Visit your doctor regularly for comprehensive checkups and to discuss your diabetes management plan.\"\n    ],\n    \"immediatetreatments\": [],\n    \"preventivemeasures\": [\n        \"Follow a healthy diet\",\n        \"Exercise regularly\",\n        \"Monitor blood sugar levels\",\n        \"Take prescribed medications\",\n        \"Quit smoking\",\n        \"Get regular checkups\"\n    ]\n}\n```"}],
+            parts: [{ text: "```json\n{\n    \"potentialhealthrisks\": [\n        \"Heart disease\",\n        \"Stroke\",\n        \"Kidney disease\",\n        \"Eye damage (retinopathy)\",\n        \"Nerve damage (neuropathy)\"\n    ],\n    \"healthimprovsuggestions\":[\n        \"Follow a healthy diet: Focus on consuming fruits, vegetables, whole grains, and lean protein. Limit processed foods, sugary drinks, and unhealthy fats.\",\n        \"Exercise regularly: Aim for at least 150 minutes of moderate-intensity exercise or 75 minutes of vigorous-intensity exercise per week.\",\n        \"Monitor your blood sugar levels: Check your blood sugar levels regularly as directed by your doctor.\",\n        \"Take prescribed medications: If prescribed, take your diabetes medications as directed.\",\n        \"Quit smoking: Smoking can worsen diabetes complications.\", \n        \"Get regular checkups: Visit your doctor regularly for comprehensive checkups and to discuss your diabetes management plan.\"\n ],\n 'disease risk prediction':[list of diseases] } "}],
           },
         ],
       });
@@ -245,7 +245,7 @@ const formatFile= (req, res) => {
 
 const getTxt = async (req, res) => {
   console.log("hello")
-  const doc = await report.findOne({File: "662bf6efddcc57968a4cb6f9"});
+  const doc = await report.findOne({_id: "662bf6f1ddcc57968a4cb6fb"});
   console.log(doc);
   res.send({
     suggestedtreatments: doc.suggtreats,

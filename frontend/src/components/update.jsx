@@ -40,25 +40,27 @@ const FileUpload = () => {
 
   return (
     <div className='upload_container'>
-      {/* <input type="file" accept="application/pdf" onChange={onFileChange} />
+      <input type="file" accept="application/pdf" onChange={onFileChange} />
       <button onClick={onFileUpload}>Upload</button>
       <p>{chatResponse}</p>
       <br /> 
-      <p>{formattedResponse}</p> */}
+      <p>{formattedResponse}</p>
 
 
-
+{/* 
 
        <div class="container">
   <h2>Upload Report</h2>
-  <input id="file-upload" class="input-file" type="file" accept="application/pdf" onChange={onFileChange} />
-  <button for="file-upload" class="upload-button" onClick={onFileUpload}>Upload</button>
-  
-  <p>{chatResponse}</p>
+  <div>
+      <input id="file-upload" className="input-file" type="file" accept="application/pdf" onChange={onFileChange} />
+      <label htmlFor="file">Upload File</label>
+      <button className="upload-button" onClick={onFileUpload}>Upload</button>
+    </div>
+  <p>{chatResponse}</p> */}
   
 </div>
 
-    </div>
+   
 
 
 
