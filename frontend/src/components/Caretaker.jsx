@@ -8,7 +8,7 @@ const Caretaker = ( )=> {
     const [dispaly, setdisplay]=useState(0)
     return(
         <div>
-            <button className="ctpatlist">Patient List</button>
+            <button className="ctpatlist">Back</button>
             <div className="ctstage">
             <Patient_tag setdisplay={setdisplay}/>
             <Patient_tag setdisplay={setdisplay}/>
