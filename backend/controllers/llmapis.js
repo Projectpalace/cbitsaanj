@@ -5,7 +5,9 @@ const express = require('express');
 const app = express();
 const pdfParse = require('pdf-parse');
 app.use(express.json());
+const {report}=require('../models')
 const { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } = require("@google/generative-ai");
+const { ObjectId } = require('mongodb');
 
 app.use(express.json());
 
@@ -34,31 +36,35 @@ const pdfSchema = new mongoose.Schema({
 const PdfModel = mongoose.model('Pdf', pdfSchema);
 
 const reportSchema = new mongoose.Schema({
-  patient: mongoose.Schema.Types.ObjectId,
-  doctor: mongoose.Schema.Types.ObjectId,
-  File: { type: mongoose.Schema.Types.ObjectId },
+  patient: ObjectId,
+  doctor: ObjectId,
+  File: ObjectId,
   dateopen: Date,
-  symptoms: [String],
+  symptoms: Array,
   fileclosed: Boolean,
-  suggtreats: [String],
-  summary: [String],
-  measures: [String],
-  preventive_measures: [String],
-  doctornotes: { type: mongoose.Schema.Types.ObjectId },
-  Medications: { type: mongoose.Schema.Types.ObjectId }
+  suggtreats: Array,
+  summary: Array,
+  measures: Array,
+  preventive_measures: Array,
+  doctornotes: Array,
+  Medications: Array
 });
 
 const ReportModel = mongoose.model('Report', reportSchema);
 
 const uploadFile = async (req, res) => {
   try {
-    const pdfBuffer = req.file.buffer; // Access the file buffer directly
+    console.log("hello");
+    const pdf=req.file;
+    console.log(pdf);
+    const pdfBuffer = pdf.buffer; // Access the file buffer directly
 
     const newPdf = new PdfModel({
       name: req.file.originalname,
       content: pdfBuffer
     });
     await newPdf.save();
+    
 
     const newReport = new ReportModel({
       patient: null,
@@ -115,7 +121,7 @@ const uploadFile = async (req, res) => {
 
     const response = result.response;
     console.log(response.text());
-    res.status(200).json({ message: response.text() });
+    res.status(200).json({ message: response.text(), pdfid: newPdf._id });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal server error.' });
@@ -140,6 +146,9 @@ const image = async(req, res) => {
 
 const formatFile= (req, res) => {
   const matter=req.body.message;
+  const pdfid=req.body.pdfid;
+  console.log(pdfid);
+  let jsonied={}
   const {
     GoogleGenerativeAI,
     HarmCategory,
@@ -201,11 +210,23 @@ const formatFile= (req, res) => {
     }
     let jsonObject = JSON.parse(jsonstring.trim());
     console.log(jsonObject);
+    jsonied=jsonObject;
 
 
-      res.send({ message: jsonObject });
+      res.send({ message: jsonObject ,pdfid:pdfid});
     }
-    runChat();
+    runChat().then(async() => {
+      const doc = await report.findOne({File: pdfid});
+      doc.suggtreats=jsonied.immediatetreatments;
+      doc.summary=jsonied.potentialhealthrisks;
+      doc.measures=jsonied.preventivemeasures;
+      doc.improveSuggestions=jsonied.healthimprovsuggestions;
+      doc.save();
+      console.log(doc);
+    })
+    .catch(err => console.log("Error generating response:", err));
+    
+
 
 };
 

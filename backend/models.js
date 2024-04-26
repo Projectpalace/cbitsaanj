@@ -18,21 +18,21 @@ caretakerSchema = new mongoose.Schema({
 voiceSchema = new mongoose.Schema({
     voiceData: Buffer,
   });
-reportschema = new mongoose.Schema({
-    patient:ObjectId,
-    doctor:ObjectId,
-    File:ObjectId,
-    dateopen:Date,
-    symptoms:Array,
-    fileclosed:Boolean,
-    suggtreats:Array,
-    summary:Array,
-    measures:Array,
-    preventive_meausres:Array,
-    doctornotes:ObjectId,
-    Medications:ObjectId,
-    food:ObjectId
-})
+  
+reportSchema = new mongoose.Schema({
+    patient: ObjectId,
+    doctor: ObjectId,
+    File: ObjectId,
+    dateopen: Date,
+    symptoms: Array,
+    fileclosed: Boolean,
+    suggtreats: Array,
+    summary: Array,
+    measures: Array,
+    improveSuggestions: Array,
+    doctornotes: Array,
+    Medications: Array
+  });
 DoctorSchema = new mongoose.Schema({
     name: String,
     docsince:Date,
@@ -42,9 +42,10 @@ DoctorSchema = new mongoose.Schema({
     reportfiles:Array,
 })
 
+
 const Patient = mongoose.model('Patient', PatientSchema)
 const caretaker = mongoose.model('caretaker', caretakerSchema)
-const report = mongoose.model('report', reportschema)
+const report = mongoose.model('report', reportSchema)
 const Voice = mongoose.model('Voice', voiceSchema);
 const doctor = mongoose.model('doctor', DoctorSchema)
 

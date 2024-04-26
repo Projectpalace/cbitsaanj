@@ -16,16 +16,17 @@ const FileUpload = () => {
     formData.append('pdf', file);
 
     // First axios request to /api/upload
-    axios.post('/en/upload', formData)
+    axios.post('/api/upload', formData)
       .then(response => {
         // Store the chat response in state
         setChatResponse(response.data.message);
         // Send the chat response to the '/api/format' endpoint
-        return axios.post('/en/format', { message: response.data.message });
+        return axios.post('/en/format', { message: response.data.message,pdfid:response.data.pdfid });
       })
       .then(formatResponse => {
         // Store the formatted response in state
         setFormattedResponse(formatResponse.data.message);
+        
       })
       .catch(error => {
         console.error("Error:", error);
