@@ -16,8 +16,11 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
   }
-  .input-file {
-    display: none;
+  input[type='button'] {
+    background-color:#0056b3;
+    height:30px;
+    width:70px;
+    
   }
   .upload-button {
     background-color: #007bff;

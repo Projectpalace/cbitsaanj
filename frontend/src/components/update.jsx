@@ -20,7 +20,7 @@ const FileUpload = () => {
     
 
     // First axios request to /api/upload
-    axios.post('/upload', formData)
+    axios.post('/api/upload', formData)
       
       .then(response => {
         // Store the chat response in state
