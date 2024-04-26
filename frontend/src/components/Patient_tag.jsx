@@ -1,7 +1,23 @@
 import './Patient_tag.css';
+import { useEffect, useState } from 'react';
 
-const Patient_tag =({setdisplay})=>
+const Patient_tag =({setdisplay,pat,setpatient})=>
 {
+    const [age, setAge] = useState(null);
+
+    useEffect(() => {
+        const dob = new Date(pat.dob);
+        const today = new Date();
+        let ageValue = today.getFullYear() - dob.getFullYear();
+        let m = today.getMonth() - dob.getMonth();
+
+        if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+            ageValue--;
+        }
+
+        setAge(ageValue);
+    }, [pat.dob]);
+
     return(
     
         <div className="Patient_tag" onClick={() =>setdisplay(1)}>
@@ -9,7 +25,7 @@ const Patient_tag =({setdisplay})=>
             <div className="patient_name">
                 <p>
                    Patient name:  <strong>
-                    T.Nithin Chowdary
+                    {pat.name}
                    </strong>
                 </p>
                 
@@ -17,7 +33,7 @@ const Patient_tag =({setdisplay})=>
             <div className="patient_name">
                 <p>
                    Blood-Group:  <strong>
-                    O+ve
+                    {pat.blood_group}
                    </strong>
                 </p>
                 
@@ -25,7 +41,7 @@ const Patient_tag =({setdisplay})=>
             <div className="patient_name">
                 <p>
                    age:  <strong>
-                    35
+                    {age}
                    </strong>
                 </p>
                 
@@ -33,7 +49,7 @@ const Patient_tag =({setdisplay})=>
             <div className="Patient_name">
                 <p>
                    Sex:  <strong>
-                    Male
+                    {pat.gender}
                    </strong>
                 </p>
                 
@@ -41,7 +57,7 @@ const Patient_tag =({setdisplay})=>
             <div className="patient_name">
                 <p>
                    Phone No:  <strong>
-                    8125611565
+                    {pat.Phone}
                    </strong>
                 </p>
                 
@@ -50,7 +66,7 @@ const Patient_tag =({setdisplay})=>
             <div className="patient_name">
                 <p>
                    patient-ID:  <strong>
-                    #123$
+                    {"#"+pat._id}
                    </strong>
                 </p>
                 
@@ -59,9 +75,7 @@ const Patient_tag =({setdisplay})=>
         <div className="patient_disc">
             <p>
                 <strong>
-                    This is patint is not a patient he is healthy with all the
-                 essential nutrition he has blood group o+ve and has all
-                 organs working properly with thier condition at their best.
+                    This patient has {pat.Chronics.length} chronic diseases
                 </strong>
                 
             </p>
