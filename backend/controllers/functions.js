@@ -82,5 +82,6 @@ module.exports = {
     playrecording,
     getreports,
     getpatient,
-    gethistory
+    gethistory,
+    getpatients
 }
