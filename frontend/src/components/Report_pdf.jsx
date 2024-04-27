@@ -8,7 +8,7 @@ export default function Report_pdf(patient) {
     return (
         <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
             <div className='document'>
-                <Viewer fileUrl='https://www.antennahouse.com/hubfs/xsl-fo-sample/pdf/basic-link-1.pdf' />;
+                <Viewer fileUrl='https://sterlingaccuris.com/static-assets/pdfs/sterling-accuris-pathology-sample-report-unlocked.pdf' />;
             </div>
             
         </Worker>

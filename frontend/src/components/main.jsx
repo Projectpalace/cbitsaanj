@@ -39,7 +39,7 @@ console.log(responseText);
       });
   }
   const back=() => {
-    if(display===1){
+    if(display>=1){
       setdisplay(0);
     }
     else if (display===0){
@@ -79,7 +79,7 @@ console.log(responseText);
                 <ul>
                 {responseText && responseText.suggestedtreatments.map((item, index)=>(
                   <li key={index}>{item}</li>
-                ))}
+                ))||<p>No immediate treatments required</p>}
               </ul>:
                   display===4 ?
                   <ul>
@@ -95,11 +95,23 @@ console.log(responseText);
                   </ul>
                   :
                   display===6 ?
-                  <p>details</p>
+                  <div>
+                    <p>Name:-{patient.name}</p>
+                    <p>Date of birth:-{patient.dob}</p>
+                    <p>Gender:-{patient.gender}</p>
+                    <p>Blood group:-{patient.blood_group}</p>
+                    <p>Phone:-{patient.Phone}</p>
+                  </div>
                   :display===7?
-                  <p>reports</p>:
+                  <div>
+                    <p>No old reports</p>
+                  </div>:
                   display===8?
-                  <p>medical history</p>
+                  <div>
+                  {patient.Chronics && patient.Chronics.map((item, index)=>(
+                    <p key={index}>{item}</p>
+                  ))}
+                  </div>
                 :<Report_pdf patient={patient}/>
               }
               <Popup Prescribe={Prescribe} setprescribe={setprescribe}/>

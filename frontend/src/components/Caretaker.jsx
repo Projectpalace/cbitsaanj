@@ -27,7 +27,7 @@ const Caretaker = ( )=> {
             <button className="ctpatlist" onClick={()=>navigate('/')}>Back</button>
             <div className="ctstage">
             {list.length!==0 && list.map((pat,index)=>(
-                      <Patient_tag key={index} setdisplay={setdisplay} setpatient={setpatient} pat={pat}/>
+                      <Patient_tag key={index} setdisplay={setdisplay} setpatient={setpatient} pat={pat} onClick={()=>navigate('/upload')}/>
                   ))}
         </div>
         </div>

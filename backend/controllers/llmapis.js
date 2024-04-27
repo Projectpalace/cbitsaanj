@@ -131,30 +131,18 @@ const uploadFile = async (req, res) => {
 const genpdf = async (req, res) => {
   console.log('loll')
   try {
-      // Create PDF buffer
-      const pdfid = req.params.id;
-      const pdf = await PdfModel.findOne({_id:pdfid});
-      const bufferToPDF = (buffer) => {
-        return new Promise((resolve, reject) => {
-            const doc = new PDFDocument();
-            const chunks = [];
-            doc.on('data', (chunk) => chunks.push(chunk));
-            doc.on('end', () => resolve(Buffer.concat(chunks)));
-            doc.end(buffer);
-        });
-      };
-      const pdfBuffer = await bufferToPDF(pdf.content);
-
-      // Set headers for PDF response
-      res.setHeader('Content-Type', 'application/pdf');
-      res.setHeader('Content-Disposition', 'attachment; filename="generated.pdf"');
-
-      // Send PDF buffer as response
-      res.send(pdfBuffer);
-  } catch (error) {
-      console.error('Error generating PDF:', error);
-      res.status(500).send('Error generating PDF');
-  }
+    const objectId = req.query.objectId;
+    // Find the PDF file URL based on the objectId in the database
+    const pdfFile = await PdfModel.findOne({ objectId });
+    if (!pdfFile) {
+        return res.status(404).json({ error: 'PDF file not found' });
+    }
+    // Return the PDF file URL
+    res.json({ url: pdfFile.url });
+} catch (error) {
+    console.error('Error fetching PDF URL:', error);
+    res.status(500).json({ error: 'Internal server error' });
+}
 }
 
 const formatFile= (req, res) => {
