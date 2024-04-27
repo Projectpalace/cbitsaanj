@@ -206,15 +206,15 @@ const formatFile= (req, res) => {
         history: [
           {
             role: "user",
-            parts: [{ text: "\"**Current Health Conditions:**\\n\\nBased on the provided laboratory test report, you have elevated levels of glycosylated hemoglobin (HbA1c) at 8.3%, which indicates poorly controlled diabetes. This condition can lead to serious complications if not managed properly.\\n\\n**Risk of Future Diseases:**\\n\\nUncontrolled diabetes can increase your risk of developing various health complications, including:\\n\\n* Heart disease\\n* Stroke\\n* Kidney disease\\n* Eye damage (retinopathy)\\n* Nerve damage (neuropathy)\\n\\n**Health Suggestions and Tips:**\\n\\nTo improve your health and manage your diabetes, it is crucial to:\\n\\n* **Follow a healthy diet:** Focus on consuming fruits, vegetables, whole grains, and lean protein. Limit processed foods, sugary drinks, and unhealthy fats.\\n* **Exercise regularly:** Aim for at least 150 minutes of moderate-intensity exercise or 75 minutes of vigorous-intensity exercise per week.\\n* **Monitor your blood sugar levels:** Check your blood sugar levels regularly as directed by your doctor.\\n* **Take prescribed medications:** If prescribed, take your diabetes medications as directed.\\n* **Quit smoking:** Smoking can worsen diabetes complications.\\n* **Get regular checkups:** Visit your doctor regularly for comprehensive checkups and to discuss your diabetes management plan.\""}],
+            parts: [{ text: "\"*Current Health Conditions:\\n\\nBased on the provided laboratory test report, you have elevated levels of glycosylated hemoglobin (HbA1c) at 8.3%, which indicates poorly controlled diabetes. This condition can lead to serious complications if not managed properly.\\n\\nRisk of Future Diseases:\\n\\nUncontrolled diabetes can increase your risk of developing various health complications, including:\\n\\n Heart disease\\n* Stroke\\n* Kidney disease\\n* Eye damage (retinopathy)\\n* Nerve damage (neuropathy)\\n\\n*Health Suggestions and Tips:\\n\\nTo improve your health and manage your diabetes, it is crucial to:\\n\\n *Follow a healthy diet:* Focus on consuming fruits, vegetables, whole grains, and lean protein. Limit processed foods, sugary drinks, and unhealthy fats.\\n* *Exercise regularly:* Aim for at least 150 minutes of moderate-intensity exercise or 75 minutes of vigorous-intensity exercise per week.\\n* *Monitor your blood sugar levels:* Check your blood sugar levels regularly as directed by your doctor.\\n* *Take prescribed medications:* If prescribed, take your diabetes medications as directed.\\n* *Quit smoking:* Smoking can worsen diabetes complications.\\n* *Get regular checkups:* Visit your doctor regularly for comprehensive checkups and to discuss your diabetes management plan.\""}],
           },
           {
             role: "model",
-            parts: [{ text: "```json\n{\n    \"potentialhealthrisks\": [\n        \"Heart disease\",\n        \"Stroke\",\n        \"Kidney disease\",\n        \"Eye damage (retinopathy)\",\n        \"Nerve damage (neuropathy)\"\n    ],\n    \"healthimprovsuggestions\":[\n        \"Follow a healthy diet: Focus on consuming fruits, vegetables, whole grains, and lean protein. Limit processed foods, sugary drinks, and unhealthy fats.\",\n        \"Exercise regularly: Aim for at least 150 minutes of moderate-intensity exercise or 75 minutes of vigorous-intensity exercise per week.\",\n        \"Monitor your blood sugar levels: Check your blood sugar levels regularly as directed by your doctor.\",\n        \"Take prescribed medications: If prescribed, take your diabetes medications as directed.\",\n        \"Quit smoking: Smoking can worsen diabetes complications.\", \n        \"Get regular checkups: Visit your doctor regularly for comprehensive checkups and to discuss your diabetes management plan.\"\n ],\n 'disease risk prediction':[list of diseases] } "}],
+            parts: [{ text: "json\n{\n    \"potentialhealthrisks\": [\n        \"Heart disease\",\n        \"Stroke\",\n        \"Kidney disease\",\n        \"Eye damage (retinopathy)\",\n        \"Nerve damage (neuropathy)\"\n    ],\n    \"healthimprovsuggestions\":[\n        \"Follow a healthy diet: Focus on consuming fruits, vegetables, whole grains, and lean protein. Limit processed foods, sugary drinks, and unhealthy fats.\",\n        \"Exercise regularly: Aim for at least 150 minutes of moderate-intensity exercise or 75 minutes of vigorous-intensity exercise per week.\",\n        \"Monitor your blood sugar levels: Check your blood sugar levels regularly as directed by your doctor.\",\n        \"Take prescribed medications: If prescribed, take your diabetes medications as directed.\",\n        \"Quit smoking: Smoking can worsen diabetes complications.\", \n        \"Get regular checkups: Visit your doctor regularly for comprehensive checkups and to discuss your diabetes management plan.\"\n    ],\n    \"immediatetreatments\": [],\n    \"preventivemeasures\": [\n        \"Follow a healthy diet\",\n        \"Exercise regularly\",\n        \"Monitor blood sugar levels\",\n        \"Take prescribed medications\",\n        \"Quit smoking\",\n        \"Get regular checkups\"\n    ]\n}\n"}],
           },
         ],
       });
-      const result = await chat.sendMessage("user will give you some information regarding his health condition like Current Health conditions,Risk of Future Diseases,health suggestions .you should understand and give response as the format which convert into json object using json.loads and format is : ```json\n{\n    \"potentialhealthrisks\": [\n        \"Heart disease\",\n        \"Stroke\",\n        \"Kidney disease\",\n        \"Eye damage (retinopathy)\",\n        \"Nerve damage (neuropathy)\"\n    ],\n    \"healthimprovsuggestions\":[\n        \"Follow a healthy diet: Focus on consuming fruits, vegetables, whole grains, and lean protein. Limit processed foods, sugary drinks, and unhealthy fats.\",\n        \"Exercise regularly: Aim for at least 150 minutes of moderate-intensity exercise or 75 minutes of vigorous-intensity exercise per week.\",\n        \"Monitor your blood sugar levels: Check your blood sugar levels regularly as directed by your doctor.\",\n        \"Take prescribed medications: If prescribed, take your diabetes medications as directed.\",\n        \"Quit smoking: Smoking can worsen diabetes complications.\", \n        \"Get regular checkups: Visit your doctor regularly for comprehensive checkups and to discuss your diabetes management plan.\"\n    ],\n    \"immediatetreatments\": [],\n    \"preventivemeasures\": [\n        \"Follow a healthy diet\",\n        \"Exercise regularly\",\n        \"Monitor blood sugar levels\",\n        \"Take prescribed medications\",\n        \"Quit smoking\",\n        \"Get regular checkups\"\n    ]\n}\n``` the health information is "+matter);
+      const result = await chat.sendMessage("the user will give you a health report analysis you should analyze them and tell report analysis,risk predictions and precautions which are available in the report.the format must be in the json format:```json {report-analysis:[list values],risk-predictions:[values],precautions:[values]}```"+"key values must not be in the string format .the health report of the user is "+matter);
       const response = result.response;
       let jsonstring=response.text();
       jsonstring=jsonstring.slice(3,-3);
@@ -222,6 +222,7 @@ const formatFile= (req, res) => {
         jsonstring = jsonstring.slice(4);
     }
     let jsonObject = JSON.parse(jsonstring.trim());
+    console.log("i am here")
     console.log(jsonObject);
     jsonied=jsonObject;
 
@@ -230,12 +231,11 @@ const formatFile= (req, res) => {
     }
     runChat().then(async() => {
       const doc = await report.findOne({File: pdfid});
-      doc.suggtreats=jsonied.immediatetreatments;
-      doc.summary=jsonied.potentialhealthrisks;
-      doc.measures=jsonied.preventivemeasures;
-      doc.improveSuggestions=jsonied.healthimprovsuggestions;
+       doc.suggtreats=jsonied["report-analysis"];
+      doc.summary=jsonied.risk-predictions;
+      doc.measures=jsonied.precautions;
       doc.save();
-      console.log(doc);
+      //console.log(doc);
     })
     .catch(err => console.log("Error generating response:", err));
     
@@ -245,13 +245,12 @@ const formatFile= (req, res) => {
 
 const getTxt = async (req, res) => {
   console.log("hello")
-  const doc = await report.findOne({_id: "662bf6f1ddcc57968a4cb6fb"});
+  const doc = await report.findOne({_id: "662c4ea134c7e348160f4afb"});
   console.log(doc);
   res.send({
     suggestedtreatments: doc.suggtreats,
     potentialhealthrisks: doc.summary,
     preventivemeasures: doc.measures,
-    preventivemeasures_new: doc.improveSuggestions
   });
   console.log(doc);
 };
