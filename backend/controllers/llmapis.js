@@ -251,7 +251,7 @@ const getTxt = async (req, res) => {
     suggestedtreatments: doc.suggtreats,
     potentialhealthrisks: doc.summary,
     preventivemeasures: doc.measures,
-    preventivemeasures_new: doc.preventive_measures
+    preventivemeasures_new: doc.improveSuggestions
   });
   console.log(doc);
 };
