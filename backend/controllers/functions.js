@@ -13,6 +13,16 @@ const welcome =(req,res) => {
     res.json("Welcomeeee")
 }
 
+const rollon=async(req,res)=>{
+  try{
+    const listofpatients = await Patiet.findOne()
+  }
+  catch(err){
+    console.log(err)
+  }
+  res.json("1")
+}
+
 const record=(req, res)=> {
   return new Promise(async (resolve, reject) => {
     try {
@@ -83,5 +93,6 @@ module.exports = {
     getreports,
     getpatient,
     gethistory,
-    getpatients
+    getpatients,
+    rollon
 }
