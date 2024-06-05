@@ -8,8 +8,7 @@ export default function Report_pdf(patient) {
     return (
         <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
             <div className='document'>
-                <Viewer fileUrl='https://cdn.countercurrents.org/wp-content/uploads/2021/07/Blood-tests-report.pdf' />;
+                <Viewer fileUrl='https://sterlingaccuris.com/static-assets/pdfs/sterling-accuris-pathology-sample-report-unlocked.pdf' />;
             </div>
-            
         </Worker>
 )}
