@@ -9,7 +9,13 @@ PatientSchema = new mongoose.Schema({
     phone:Number,
     reportsList:Array,//latest report is at 0 index
     bloodGroup:String,
-
+})
+oldAgeHomeSchema=new mongoose.Schema({
+    name:String,
+    doctors:Array,
+    patients:Array,
+    address:String,
+    contact:Number,
 })
 reportSchema = new mongoose.Schema({
     patient: String,
@@ -24,7 +30,14 @@ reportSchema = new mongoose.Schema({
     doctorNotes: ObjectId
   });
 
+doctorSchema = new mongoose.Schema({
+    name: String,
+    specialization: String
+});
+
 const Patient = mongoose.model('Patient', PatientSchema);
 const Report = mongoose.model('Report', reportSchema);
+const oldAgeHome = mongoose.model('oldAgeHome', oldAgeHomeSchema);
+const doctor = mongoose.model('doctor', doctorSchema);
 
-module.exports = { Patient, Report }
+module.exports = { Patient, Report , oldAgeHome, doctor}

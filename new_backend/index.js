@@ -33,11 +33,11 @@ app.get("/",cors(),(req,res)=>{
   res.sendFile(path.resolve(__dirname,'./build', 'index.html'));
 })
 app.use('/en',approute);
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
 app.get('*', function(req, res) {
   res.sendFile(path.resolve(__dirname,'./build', 'index.html'));
+});
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
 });
 
 
