@@ -15,7 +15,7 @@ const welcome =(req,res) => {
 
 const rollon=async(req,res)=>{
   try{
-    const listofpatients = await Patiet.findOne()
+    const listofpatients = await Patient.findOne()
   }
   catch(err){
     console.log(err)

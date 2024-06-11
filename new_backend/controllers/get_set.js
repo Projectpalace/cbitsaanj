@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
-const { Report, Patient, oldAgeHome, doctor } = require("../Schema.js");
+const { report, patient, oldAgeHome, doctor } = require("../Schema.js");
 
 
 
 const getReport = async (req, res) => {
     try {
-        const id = req.body.id;
-        const report = await Report.findOne({ _id: id });
-        res.json(report);
+        const id = req.params.id;
+        const reportInfo = await report.findOne({ _id: id });
+        res.json(reportInfo);
     }
     catch (error) {
         console.log(error);
@@ -16,14 +16,14 @@ const getReport = async (req, res) => {
 }
 
 const getPatient = async (req,res) => {
-    const id = req.body.id;
-    const patient =await Patient.findOne({_id:id});
-    res.json(patient);
+    const id = req.params.id;
+    const patientInfo =await patient.findOne({_id:id});
+    res.json(patientInfo);
 }
 
 const getPatients = async (req,res) => {
     try{
-        const patients = await Patient.find();
+        const patients = await oldAgeHome.findOne().select('patients'); // TODO: add session oldagehome query
         res.json(patients);
     }
     catch(error){
@@ -34,8 +34,8 @@ const getPatients = async (req,res) => {
 
 const getOldageHomeInfo = async (req,res) => {
     try{
-        const name = req.body.name;
-        const oldAgeHomeDetails = await oldAgeHome.findOne({name : name});
+        const name = req.params.name;
+        const oldAgeHomeDetails = await oldAgeHome.findOne(); // TODO: add session oldagehome query
         res.json(oldAgeHomeDetails);
     }
     catch(error){
@@ -43,3 +43,5 @@ const getOldageHomeInfo = async (req,res) => {
         res.status(500).json({error: 'Failed to retrieve old age home details'});
     }
 }
+
+module.exports = { getReport, getPatient, getPatients, getOldageHomeInfo }

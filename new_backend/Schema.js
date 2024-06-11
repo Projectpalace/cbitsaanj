@@ -1,6 +1,6 @@
 const { ObjectId } = require('mongodb')
 const mongoose = require('mongoose')
-PatientSchema = new mongoose.Schema({
+patientSchema = new mongoose.Schema({
     patientID:Number,
     name: String,
     DOB:Date,
@@ -35,9 +35,9 @@ doctorSchema = new mongoose.Schema({
     specialization: String
 });
 
-const Patient = mongoose.model('Patient', PatientSchema);
-const Report = mongoose.model('Report', reportSchema);
+const patient = mongoose.model('patient', patientSchema);
+const report = mongoose.model('report', reportSchema);
 const oldAgeHome = mongoose.model('oldAgeHome', oldAgeHomeSchema);
 const doctor = mongoose.model('doctor', doctorSchema);
 
-module.exports = { Patient, Report , oldAgeHome, doctor}
+module.exports = { patient, report , oldAgeHome, doctor}
