@@ -27,7 +27,7 @@ reportSchema = new mongoose.Schema({
     severity:Number,
     summary: String,
     possibleDiseases: Array,
-    doctorNotes: ObjectId
+    doctorNotes: ObjectId//prescribtion
   });
 
 doctorSchema = new mongoose.Schema({
