@@ -44,4 +44,6 @@ const getOldageHomeInfo = async (req,res) => {
     }
 }
 
+// TODO Create Patient
+
 module.exports = { getReport, getPatient, getPatients, getOldageHomeInfo }
