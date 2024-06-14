@@ -17,11 +17,11 @@ const apiKey = process.env.GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(apiKey);
 
 const model = genAI.getGenerativeModel({
-  model: "gemini-1.5-flash",
+  model: "gemini-1.5-pro",
 });
 
 const generationConfig = {
-  temperature: 1,
+  temperature: 0,
   topP: 0.95,
   topK: 64,
   maxOutputTokens: 8192,
@@ -43,7 +43,7 @@ async function run() {
       {
         role: "model",
         parts: [
-          {text: "The test reports indicate a consistent pattern of elevated fasting plasma glucose and 2 hours post lunch plasma glucose levels, suggesting type 2 diabetes. The glycosylated haemoglobin levels are also consistently elevated, further supporting this diagnosis. The patient's cholesterol levels are borderline high, but not concerningly so. The mild anisocytosis in the red blood cells and slightly elevated RDW values suggest a mild anemia. All other blood parameters are within the normal range. The urine analysis results are unremarkable. Overall, the test reports indicate a person with type 2 diabetes and mild anemia.  \n"},
+          {text: "Over the three-month period, the patient's test results show a trend of consistently high glucose levels, indicating poorly controlled diabetes. While HbA1c levels fluctuate slightly, they remain elevated, suggesting persistent hyperglycemia. Lipid profile reveals borderline high triglycerides and total cholesterol, with LDL cholesterol slightly elevated and HDL cholesterol on the lower end, increasing cardiovascular risk. Kidney function remains stable, with normal urea and creatinine levels.  Mild anemia persists, with slightly low hemoglobin and hematocrit levels, but red blood cell indices suggest it's likely not due to iron deficiency.  White blood cell counts are within the normal range, and urinalysis shows no significant abnormalities. Overall, the patient's condition requires close monitoring and management, particularly focusing on glycemic control and cardiovascular risk factors. \n"},
         ],
       },
     ],
