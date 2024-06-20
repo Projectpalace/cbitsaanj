@@ -158,7 +158,7 @@ const uploadReport = async (req,res) => {
             systemInstruction:
                 'you are a medical reports analyzer which analyze the reports and give output in a specific format where the  Keys are summary of analysis, Date of report , Precautions, Possible disease risks, severity rating out of 10, which specialist(one or less) is needed. the format of output should be in:  Short-Analysis:String,Precautions:Array,Possible-disease risks:Array,Severity:int,specialist:String as json format\n',
         });
-
+        medobject=medobject["chronic conditions"]= await patient.findOne({_id:pid}).select({'chronics':1,'-_id':1});
         const generationConfig = {
             temperature: 0,
             topP: 0.95,
@@ -263,7 +263,7 @@ const uploadReport = async (req,res) => {
         a.periodicAnalysis = result.response.text();
         a.save();
     };
-    medobject = await function1();
+    let medobject = await function1();
     if (medobject == 'no') {
         console.log('no report found');
         res.json('Error');

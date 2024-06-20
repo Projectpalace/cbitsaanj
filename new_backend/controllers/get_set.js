@@ -15,6 +15,19 @@ const getReport = async (req, res) => {
     }
 }
 
+const setPatient = async (req,res)=>{
+    const info = req.body.info;
+    let newpatient = new patient({
+        name:info.name,
+        DOB:info.date,
+        chronics:info.chronics,
+        bloodGroup:info.bloodGroup,
+        phone:info.phone
+    })
+    newpatient = await newpatient.save();
+    res.json(newpatient._id);
+}
+
 const getPatient = async (req,res) => {
     const id = req.params.id;
     const patientInfo =await patient.findOne({_id:id});
@@ -46,4 +59,4 @@ const getOldageHomeInfo = async (req,res) => {
 
 // TODO Create Patient
 
-module.exports = { getReport, getPatient, getPatients, getOldageHomeInfo }
+module.exports = { getReport, getPatient, setPatient, getPatients, getOldageHomeInfo }
