@@ -26,6 +26,7 @@ app.get('/', cors(), (req, res) => {
     res.sendFile(path.resolve(__dirname, './build', 'index.html'));
 });
 
+
 app.use('/en', approute);
 
 app.get('*', function (req, res) {
