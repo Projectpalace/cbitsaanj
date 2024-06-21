@@ -8,6 +8,7 @@ patientSchema = new mongoose.Schema({
     chronics:Array,//Chronical diseases like diabetes,BP
     phone:Number,
     reportsList:Array,//latest report is at 0 index
+    weight:Number,
     bloodGroup:String,
 })
 oldAgeHomeSchema=new mongoose.Schema({

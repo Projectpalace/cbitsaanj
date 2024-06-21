@@ -15,6 +15,17 @@ const getReport = async (req, res) => {
     }
 }
 
+const getReports= async (req, res) => {
+    try {
+        const reports = await report.find();
+        res.json(reports);
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'Failed to retrieve reports' });
+    }
+}
+
 const setPatient = async (req,res)=>{
     const info = req.body.info;
     let newpatient = new patient({
@@ -22,7 +33,9 @@ const setPatient = async (req,res)=>{
         DOB:info.date,
         chronics:info.chronics,
         bloodGroup:info.bloodGroup,
-        phone:info.phone
+        gender:info.gender,
+        phone:info.phone,
+        weight:info.weight,
     })
     newpatient = await newpatient.save();
     res.json(newpatient._id);
@@ -59,4 +72,4 @@ const getOldageHomeInfo = async (req,res) => {
 
 // TODO Create Patient
 
-module.exports = { getReport, getPatient, setPatient, getPatients, getOldageHomeInfo }
+module.exports = { getReport, getPatient, getReports, setPatient, getPatients, getOldageHomeInfo }
